@@ -7,12 +7,22 @@ import smallLeftArrow from "../data/image/smallLeftArrow.png";
 import smallRightArrow from "../data/image/smallRightArrow.png";
 import largeWhiteLeftArrow from "../data/image/largeWhiteLeftArrow.png";
 import largeWhiteRightArrow from "../data/image/largeWhiteRightArrow.png";
-import { Header30, Header32 } from "../styledMixins";
+import {
+  Body14,
+  Gray400,
+  Gray600,
+  Header30,
+  Header32,
+  MonoBlack,
+  Title13,
+} from "../styledMixins";
+import GNB from "../components/GNB";
 
 const LoginPage = () => {
   return (
     <StyledLoginPage>
-      <img src={loginImg} />
+      <GNB />
+      <img className="loginImg" src={loginImg} />
       <div>
         <div className="loginText">로그인</div>
         <div>
@@ -44,7 +54,7 @@ const StyledLoginPage = styled.div`
   align-items: center;
   justify-content: center;
   flex-direction: column;
-  img {
+  .loginImg {
     margin-top: 40px;
     margin-bottom: 40px;
     width: 588px;
@@ -57,6 +67,14 @@ const StyledLoginPage = styled.div`
     background: #ffffff;
     border: 1px solid #ebebeb;
     border-radius: 4px;
+    padding-left: 12px;
+    ${MonoBlack};
+    ${Body14};
+
+    ::placeholder {
+      ${Body14};
+      ${Gray400};
+    }
   }
 
   .idWrap {
@@ -66,6 +84,8 @@ const StyledLoginPage = styled.div`
   .idText,
   .pwText {
     margin-bottom: 6px;
+    ${Gray600};
+    ${Title13};
   }
 
   .loginText {
