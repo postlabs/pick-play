@@ -24,7 +24,7 @@ function Post(props) {
                         <Date>{data.date}</Date>
                         <Reply>
                             <ReplyText>댓글</ReplyText>
-                            <ReplyCount>{data.ReplyCount}</ReplyCount>
+                            <ReplyCount>{data.replyCount}</ReplyCount>
                         </Reply>
                         <ReplyBtn onClick={onClick}>댓글 달기</ReplyBtn>
                     </InfoStyle>
