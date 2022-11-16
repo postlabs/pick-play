@@ -1,9 +1,9 @@
 import React from "react";
 import styled from "styled-components";
-import smallLeftArrow from "../../static/img/smallLeftArrow.png";
-import smallRightArrow from "../../static/img/smallRightArrow.png";
-import largeWhiteLeftArrow from "../../static/img/largeWhiteLeftArrow.png";
-import largeWhiteRightArrow from "../../static/img/largeWhiteRightArrow.png";
+import smallLeftArrow from "../../data/image/smallLeftArrow.png";
+import smallRightArrow from "../../data/image/smallRightArrow.png";
+import largeWhiteLeftArrow from "../../data/image/largeWhiteLeftArrow.png";
+import largeWhiteRightArrow from "../../data/image/largeWhiteRightArrow.png";
 
 function BasicButton(props) {
   const { text, size, arrow, width } = props;
