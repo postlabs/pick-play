@@ -1,12 +1,7 @@
-import React from "react";
+import React, { useState } from "react";
 import styled from "styled-components";
 import loginImg from "../data/image/loginImg.png";
 import BasicButton from "../components/BasicButton/BasicButton";
-// import { Header32 } from "../../styledMixins";
-import smallLeftArrow from "../data/image/smallLeftArrow.png";
-import smallRightArrow from "../data/image/smallRightArrow.png";
-import largeWhiteLeftArrow from "../data/image/largeWhiteLeftArrow.png";
-import largeWhiteRightArrow from "../data/image/largeWhiteRightArrow.png";
 import {
   Body14,
   Gray400,
@@ -17,8 +12,30 @@ import {
   Title13,
 } from "../styledMixins";
 import GNB from "../components/GNB";
+import userData from "../data/json/front_demo_data.json";
+import { useDispatch } from "react-redux";
+import { getUserInformation } from "../modules/userInfo";
 
 const LoginPage = () => {
+  let [id, setId] = useState();
+  let [password, setPassword] = useState();
+  let [failLogin, setFailLogin] = useState(false);
+
+  const dispatch = useDispatch();
+
+  console.log(userData);
+
+  const handleLogin = () => {
+    if (id && password) {
+      const userData = userData.filter(
+        (data) => data.id === id && data.password === password
+      );
+      dispatch(getUserInformation(userData));
+    }
+  };
+
+  //useEffect 사용해서 로그인 페이지들어오면 리덕스 유저정보 삭제
+
   return (
     <StyledLoginPage>
       <GNB />
@@ -28,15 +45,23 @@ const LoginPage = () => {
         <div>
           <div className="idWrap">
             <div className="idText">아이디</div>
-            <input placeholder="아이디 입력" type="text" />
+            <input
+              onChange={(e) => setId(e.target.value)}
+              placeholder="아이디 입력"
+              type="text"
+            />
           </div>
           <div className="pwWrap">
             <div className="pwText">비밀번호</div>
-            <input placeholder="비밀번호 입력" type="text" />
+            <input
+              onChange={(e) => setPassword(e.target.value)}
+              placeholder="비밀번호 입력"
+              type="text"
+            />
           </div>
         </div>
       </div>
-      <div className="loginBtn">
+      <div onClick={handleLogin} className="loginBtn">
         <BasicButton
           text={"로그인"}
           size={"big"}

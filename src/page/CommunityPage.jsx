@@ -1,7 +1,7 @@
 import React from "react";
 import GNB from "../components/GNB";
 import styled from "styled-components";
-import {Header36, MonoBlack} from "../styledMixins"
+import { Header36, MonoBlack } from "../styledMixins";
 import PostList from "../components/PostList";
 
 const CommunityPage = () => {
@@ -10,7 +10,7 @@ const CommunityPage = () => {
       <GNB />
       <Content>
         <Title>커뮤니티</Title>
-        <PostList/>
+        <PostList />
       </Content>
     </StyleListPage>
   );
@@ -30,7 +30,6 @@ const StyleListPage = styled.div`
   margin: 0 auto;
   margin-top: 60px;
   //border: 1px solid black;
-  
 `;
 
 const Content = styled.div`

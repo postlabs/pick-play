@@ -5,6 +5,7 @@ import styled from "styled-components";
 import { Link } from "react-router-dom";
 
 import { Body16, MonoBlack } from "../../styledMixins";
+import { useSelector } from "react-redux";
 
 let menu = [
   {
@@ -27,22 +28,47 @@ let menu = [
     name: "커뮤니티",
     link: "/community",
   },
+  {
+    name: "로그아웃",
+    link: "/login",
+  },
+];
+
+let nonLoginMenu = [
+  {
+    name: "로그인",
+    link: "/login ",
+  },
 ];
 
 function GNB() {
+  const loginInfo = useSelector((state) => state.loginInfo);
+
+  console.log(loginInfo);
+
   return (
     <GnbStyle>
       <LogoProbe></LogoProbe>
       <MenuStyle>
-        {menu.map((item, index) => {
-          return (
-            <Link to={item.link}>
-              <Menu key={index}>
-                <MenuDiv>{item.name}</MenuDiv>
-              </Menu>
-            </Link>
-          );
-        })}
+        {loginInfo
+          ? menu.map((item, index) => {
+              return (
+                <Link to={item.link}>
+                  <Menu key={index}>
+                    <MenuDiv>{item.name}</MenuDiv>
+                  </Menu>
+                </Link>
+              );
+            })
+          : nonLoginMenu.map((item, index) => {
+              return (
+                <Link to={item.link}>
+                  <Menu key={index}>
+                    <MenuDiv>{item.name}</MenuDiv>
+                  </Menu>
+                </Link>
+              );
+            })}
       </MenuStyle>
     </GnbStyle>
   );

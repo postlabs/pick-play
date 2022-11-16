@@ -4,7 +4,6 @@ import { Gray500, Header14, Header18 } from "../styledMixins";
 import GNB from "./GNB";
 import exImg from "../data/image/loginImg.png";
 const Product = ({ product }) => {
-  console.log(product);
   return (
     <StyledProduct>
       <a
