@@ -1,28 +1,37 @@
-import React from "react";
+import React, {Fragment, useState} from "react";
 import styled from "styled-components";
-
 import {Header14, Header12, Body14, Body12, MonoBlack, Gray600} from "../../styledMixins"
+import FBInputContainer from "../FBInputContainer";
+
 function Post(props) {
     const { data } = props;
     console.log(data.img)
+
+    const [click, setClick] = useState(false);
+    const onClick = () => {
+        setClick(!click);
+    }
     return (
-        <PostStyle>
-            <LeftStyle>
-                <Img src={data.img}/>
-            </LeftStyle>
-            <RightStyle>
-                <NameStyle>{data.name}</NameStyle>
-                <ArticleStyle>{data.article}</ArticleStyle>
-                <InfoStyle>
-                    <Date>{data.date}</Date>
-                    <Reply>
-                        <ReplyText>댓글</ReplyText>
-                        <ReplyCount>{data.ReplyCount}</ReplyCount>
-                    </Reply>
-                    <ReplyBtn>댓글 달기</ReplyBtn>
-                </InfoStyle>
-            </RightStyle>
-        </PostStyle>
+        <Fragment>
+            <PostStyle>
+                <LeftStyle>
+                    <Img src={data.img}/>
+                </LeftStyle>
+                <RightStyle>
+                    <NameStyle>{data.name}</NameStyle>
+                    <ArticleStyle>{data.article}</ArticleStyle>
+                    <InfoStyle>
+                        <Date>{data.date}</Date>
+                        <Reply>
+                            <ReplyText>댓글</ReplyText>
+                            <ReplyCount>{data.ReplyCount}</ReplyCount>
+                        </Reply>
+                        <ReplyBtn onClick={onClick}>댓글 달기</ReplyBtn>
+                    </InfoStyle>
+                </RightStyle>
+            </PostStyle>
+            {click && <FBInputContainer/>}
+        </Fragment>
     );
 }
 
@@ -43,16 +52,6 @@ const LeftStyle = styled.div`
 `;
 const RightStyle = styled.div`
     width: 710px;
-`;
-
-const ImgCircle = styled.div`
-    width: 38px;
-    height: 38px;
-    margin-top: 16px;
-    margin-left: 16px;
-    //border: 1px solid red;
-    border-radius: 50%;
-    z-index: 1;
 `;
 
 const Img = styled.img`

@@ -7,6 +7,7 @@ import YoutubePage from "./page/YoutubePage";
 import ProductPage from "./page/ProductPage";
 import AnalysisPage from "./page/AnalysisPage";
 import CommunityPage from "./page/CommunityPage";
+import LoadingPage from "./page/LoadingPage";
 import { createGlobalStyle } from "styled-components";
 import reset from "styled-reset";
 
@@ -25,6 +26,7 @@ function App() {
         <Route path="/product" element={<ProductPage />} />
         <Route path="/analysis" element={<AnalysisPage />} />
         <Route path="/community" element={<CommunityPage />} />
+        <Route path="/loading" element={<LoadingPage />} />
       </Routes>
     </>
   );
