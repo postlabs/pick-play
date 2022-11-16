@@ -96,7 +96,7 @@ const StyleListPage = styled.div`
   //left: 0;
   //background-color: white;
   margin: 0 auto;
-  margin-top: 60px;
+  //margin-top: 60px;
   //border: 1px solid black;
   
 `;
