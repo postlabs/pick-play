@@ -4,9 +4,10 @@ import styled from "styled-components";
 import {Body14, Gray400, Header14, Header36, MonoBlack} from "../styledMixins"
 import PostList from "../components/PostList";
 import bgImage from "../data/image/coummunity_bg.png"
+import FBInputContainer from "../components/FBInputContainer";
 
 const CommunityPage = () => {
-
+  /* 
   const [content, _setContent] = useState("");
 
   
@@ -33,7 +34,7 @@ const CommunityPage = () => {
     //   };
     //   const headers = {
     //     "Content-type": "application/x-www-form-urlencoded; charset=UTF-8",
-    //     Accept: "*/*",
+    
     //   };
    
     //   url =
@@ -54,28 +55,15 @@ const CommunityPage = () => {
     //     });
     // }
   };
-
+  */
   return (
     <StyleListPage>
       <GNB />
       <Content>
         <Title>커뮤니티</Title>
         <PostList/>
-      
-        <FBInputContainer>
-          <div className="flexElement">
-            <FBInput
-              type="text"
-              placeholder="댓글을 입력해주세요"
-              onChange={handleCommentUpdate}
-              value={content}
-              messageCount={content.length}
-            />
-            <FBButton message={content.length} onClick={handleSubmit}>
-              남기기
-            </FBButton>
-          </div>
-        </FBInputContainer>
+        <FBInputContainer/>
+        
       </Content>
       <BgStyle>
         <BgImg src={bgImage} alt="bgImage" />
@@ -117,7 +105,7 @@ const Title = styled.div`
   ${Header36}
   ${MonoBlack}
 `;
-
+/* 
 const FBInputContainer = styled.div`
   width: 100%;
   height: 40px;
@@ -177,7 +165,7 @@ const FBButton = styled.button`
   cursor: ${(props) =>
     props.message === 0 || props.message > 110 ? "not-allowed" : "pointer"};
 `;
-
+*/
 const BgStyle = styled.div`
     position: fixed;
     width: 344px;
