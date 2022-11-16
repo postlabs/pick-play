@@ -85,8 +85,8 @@ const CommunityPage = () => {
 };
 
 const StyleListPage = styled.div`
-  width: 1200px;
-  height: 500px;
+  width: 1224px;
+  //height: 500px;
   //display: flex;
   //align-items: center;
   //justify-content: space-between;
