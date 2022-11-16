@@ -1,24 +1,32 @@
-import logo from './logo.svg';
-import './App.css';
+import logo from "./logo.svg";
+import "./App.css";
+import { Route, Routes } from "react-router-dom";
+import HomePage from "./page/HomePage";
+import LoginPage from "./page/LoginPage";
+import YoutubePage from "./page/YoutubePage";
+import ProductPage from "./page/ProductPage";
+import AnalysisPage from "./page/AnalysisPage";
+import CommunityPage from "./page/CommunityPage";
+import { createGlobalStyle } from "styled-components";
+import reset from "styled-reset";
+
+const GlobalStyle = createGlobalStyle`
+${reset}
+`;
 
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <>
+      <GlobalStyle />
+      <Routes>
+        <Route path="/" element={<HomePage />} />
+        <Route path="/login" element={<LoginPage />} />
+        <Route path="/youtube" element={<YoutubePage />} />
+        <Route path="/product" element={<ProductPage />} />
+        <Route path="/analysis" element={<AnalysisPage />} />
+        <Route path="/community" element={<CommunityPage />} />
+      </Routes>
+    </>
   );
 }
 
