@@ -1,12 +1,18 @@
 import React from "react";
+import GNB from "../components/GNB";
 import styled from "styled-components";
+
 const HomePage = () => {
-  return <StyledHomePage>안녕하세요</StyledHomePage>;
+  return (
+    <StyleListPage>
+      <GNB />
+      
+    </StyleListPage>
+  );
 };
 
-const StyledHomePage = styled.div`
-  font-family: "Pretendard Bold";
-  font-weight: 700;
+const StyleListPage = styled.div`
+  margin: 0 auto;
 `;
 
 export default HomePage;
