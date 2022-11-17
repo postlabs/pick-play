@@ -163,16 +163,6 @@ const FBButton = styled.button`
 `;
 */
 const BgStyle = styled.div`
-<<<<<<< Updated upstream
-  position: fixed;
-  width: 344px;
-  height: 626px;
-  right: 0;
-  bottom: 0;
-  margin-right: 30px;
-  margin-bottom: 30px;
-`;
-=======
     position: fixed;
     width: 344px;
     height: 626px;
@@ -182,7 +172,6 @@ const BgStyle = styled.div`
     margin-bottom: 30px;
     z-index: -1;
 `
->>>>>>> Stashed changes
 
 const BgImg = styled.img`
   width: 344px;
