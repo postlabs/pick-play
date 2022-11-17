@@ -1,9 +1,15 @@
 import React, { useState } from "react";
 import GNB from "../components/GNB";
 import styled from "styled-components";
-import {Body14, Gray400, Header14, Header36, MonoBlack} from "../styledMixins"
+import {
+  Body14,
+  Gray400,
+  Header14,
+  Header36,
+  MonoBlack,
+} from "../styledMixins";
 import PostList from "../components/PostList";
-import bgImage from "../data/image/coummunity_bg.png"
+import bgImage from "../data/image/coummunity_bg.png";
 import FBInputContainer from "../components/FBInputContainer";
 
 const CommunityPage = () => {
@@ -58,12 +64,11 @@ const CommunityPage = () => {
   */
   return (
     <StyleListPage>
-      <GNB />
       <Content>
+        <GNB />
         <Title>커뮤니티</Title>
-        <PostList/>
-        <FBInputContainer/>
-        
+        <PostList />
+        <FBInputContainer />
       </Content>
       <BgStyle>
         <BgImg src={bgImage} alt="bgImage" />
@@ -73,10 +78,11 @@ const CommunityPage = () => {
 };
 
 const StyleListPage = styled.div`
-  width: 1224px;
+  /* width: 1200px; */
   //height: 500px;
-  //display: flex;
-  //align-items: center;
+  display: flex;
+  align-items: center;
+  justify-content: center;
   //justify-content: space-between;
   //position: fixed;
   //top: 0;
@@ -86,13 +92,16 @@ const StyleListPage = styled.div`
   margin: 0 auto;
   //margin-top: 60px;
   //border: 1px solid black;
-  
 `;
 
 const Content = styled.div`
   width: 792px;
   //border: 1px solid red;
   margin: 0 auto;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
 `;
 
 const Title = styled.div`
@@ -167,17 +176,17 @@ const FBButton = styled.button`
 `;
 */
 const BgStyle = styled.div`
-    position: fixed;
-    width: 344px;
-    height: 626px;
-    right: 0;
-    bottom: 0;
-    margin-right: 30px;
-    margin-bottom: 30px;
-`
+  position: fixed;
+  width: 344px;
+  height: 626px;
+  right: 0;
+  bottom: 0;
+  margin-right: 30px;
+  margin-bottom: 30px;
+`;
 
 const BgImg = styled.img`
-    width: 344px;
-    height: 626px;
+  width: 344px;
+  height: 626px;
 `;
 export default CommunityPage;

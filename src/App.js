@@ -10,6 +10,8 @@ import CommunityPage from "./page/CommunityPage";
 import LoadingPage from "./page/LoadingPage";
 import { createGlobalStyle } from "styled-components";
 import reset from "styled-reset";
+import GNB from "./components/GNB";
+import styled from "styled-components";
 
 const GlobalStyle = createGlobalStyle`
 ${reset}
@@ -17,7 +19,7 @@ ${reset}
 
 function App() {
   return (
-    <>
+    <StyledApp>
       <GlobalStyle />
       <Routes>
         <Route path="/" element={<HomePage />} />
@@ -28,8 +30,14 @@ function App() {
         <Route path="/community" element={<CommunityPage />} />
         <Route path="/loading" element={<LoadingPage />} />
       </Routes>
-    </>
+    </StyledApp>
   );
 }
+
+const StyledApp = styled.div`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+`;
 
 export default App;

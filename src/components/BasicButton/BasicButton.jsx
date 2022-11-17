@@ -6,7 +6,7 @@ import largeWhiteLeftArrow from "../../data/image/largeWhiteLeftArrow.png";
 import largeWhiteRightArrow from "../../data/image/largeWhiteRightArrow.png";
 
 function BasicButton(props) {
-  const { text, size, arrow, width } = props;
+  const { text, size, arrow, width, cursor } = props;
 
   return (
     <StyledBasicButton {...props}>
@@ -83,7 +83,7 @@ const StyledBasicButton = styled.div`
   :active {
     background: ${(props) => props.state !== "disabled" && "#303030;"};
   }
-  cursor: pointer;
+  cursor: ${(props) => (props.cursor ? props.cursor : "pointer")};
 
   .largeWhiteLeftArrow {
     margin-right: 4px;

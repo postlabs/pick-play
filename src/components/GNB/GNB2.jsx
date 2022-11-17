@@ -49,27 +49,16 @@ function GNB() {
         {userInformation
           ? menu.map((item, index) => {
               return (
-                <Link to={item.link}>
-                  <Menu key={index}>
-                    <MenuDiv
-                      onClick={() =>
-                        item.name === "로그아웃" &&
-                        dispatch(getUserInformation(""))
-                      }
-                    >
-                      {item.name}
-                    </MenuDiv>
-                  </Menu>
-                </Link>
+                <Menu key={index}>
+                  <MenuDiv>{item.name}</MenuDiv>
+                </Menu>
               );
             })
           : nonLoginMenu.map((item, index) => {
               return (
-                <Link to={item.link}>
-                  <Menu key={index}>
-                    <MenuDiv>{item.name}</MenuDiv>
-                  </Menu>
-                </Link>
+                <Menu key={index}>
+                  <MenuDiv>{item.name}</MenuDiv>
+                </Menu>
               );
             })}
       </MenuStyle>

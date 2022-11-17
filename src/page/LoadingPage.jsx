@@ -1,14 +1,20 @@
 import React, { useState, useEffect } from "react";
 import { Header32, MonoBlack } from "../styledMixins";
 import styled from "styled-components";
-import GNB from "../components/GNB";
+import GNB2 from "../components/GNB/GNB2";
 import Dot from "../components/Dot";
+import { useNavigate } from "react-router-dom";
+import { useSelector } from "react-redux";
 
 const LoadingPage = () => {
+  const userInformation = useSelector((state) => state.userInfo.userInfo[0]);
+
   const [count, setCount] = useState(0);
   const [circle1, setCircle1] = useState(false);
   const [circle2, setCircle2] = useState(false);
   const [circle3, setCircle3] = useState(false);
+
+  const navigate = useNavigate();
   useEffect(() => {
     let timer = setInterval(() => {
       setCount(count + 1);
@@ -38,9 +44,22 @@ const LoadingPage = () => {
       setCircle3(true);
     }
   }, [count]);
+
+  useEffect(() => {
+    setTimeout(() => {
+      navigate("/analysis");
+    }, 3000);
+  }, []);
+
+  useEffect(() => {
+    if (userInformation === undefined) {
+      window.location.href = "/login";
+    }
+  }, []);
+
   return (
     <StyleListPage>
-      <GNB />
+      <GNB2 />
       <LoadingBox>
         <DotBox>
           {circle1 ? <Dot color="#93D0F1" /> : <Dot color="#FFFFFFF" />}
@@ -59,9 +78,6 @@ const LoadingPage = () => {
 const StyleListPage = styled.div`
   width: 1200px;
   height: 100%;
-  //display: flex;
-  //align-items: center;
-  //justify-content: space-between;
   margin: 0 auto;
   margin-top: 60px;
   //border: 1px solid black;
@@ -71,7 +87,10 @@ const LoadingBox = styled.div`
   width: 1200px;
   height: 156px;
   margin-top: 381px;
-  //border: 1px solid black;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
 `;
 
 const DotBox = styled.div`
@@ -80,7 +99,7 @@ const DotBox = styled.div`
   display: flex;
   flex-direction: row;
   margin-bottom: 60px;
-  //border: 1px solid black;
+
   justify-content: center;
   gap: 12px;
 `;
