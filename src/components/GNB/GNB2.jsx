@@ -7,7 +7,7 @@ import { Link } from "react-router-dom";
 import { Body16, MonoBlack } from "../../styledMixins";
 import { useDispatch, useSelector } from "react-redux";
 import { getUserInformation } from "../../modules/userInfo";
-
+import logoImg from "../../data/image/Pick&Play_Logo.png";
 let menu = [
   {
     name: "성향 분석",
@@ -44,7 +44,10 @@ function GNB() {
 
   return (
     <GnbStyle>
-      <LogoProbe></LogoProbe>
+      <LogoProbeStyle>
+        <LogoProbeImg src={logoImg} alt="logo" />
+      </LogoProbeStyle>
+
       <MenuStyle>
         {userInformation
           ? menu.map((item, index) => {
@@ -97,6 +100,30 @@ const MenuDiv = styled.div`
   margin-left: 40px;
   //border: 1px solid red;
   text-align: center;
+`;
+
+const LogoProbeStyle = styled.div`
+  height: 45px;
+  width: 200px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  //border: 1px none;
+  //border: 1px solid red;
+
+  margin-top: 14;
+  margin-left: 40;
+`;
+
+const LogoProbeImg = styled.img`
+  width: 200px;
+  height: 45px;
+  min-height: 36px;
+  margin-top: 0px;
+
+  line-height: 36px;
+  white-space: nowrap;
 `;
 
 export default GNB;

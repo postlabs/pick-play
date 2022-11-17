@@ -79,7 +79,7 @@ const StyleListPage = styled.div`
   width: 1200px;
   height: 100%;
   margin: 0 auto;
-  margin-top: 60px;
+
   //border: 1px solid black;
 `;
 
