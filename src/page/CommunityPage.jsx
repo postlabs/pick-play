@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import GNB from "../components/GNB";
 import styled from "styled-components";
 import {
@@ -11,64 +11,51 @@ import {
 import PostList from "../components/PostList";
 import bgImage from "../data/image/coummunity_bg.png";
 import FBInputContainer from "../components/FBInputContainer";
+import axios from "axios";
 
 const CommunityPage = () => {
-  /* 
-  const [content, _setContent] = useState("");
+    const [posts, setPosts] = useState([]);
+    const [updated, setUpdated] = useState(false);
+    const [rand, setRand] = useState(0);
 
-  
-  const handleCommentUpdate =(e) => {
-    _setContent(e.target.value);
-  }
-  const handleSubmit = (event) => {
-    // if (window.innerWidth < 791 && message.length > 110) {
-    //   setOverTextCount(true);
-    //   WaringTextRef.current.focus();
-    //   return;
-    // }
-    // checkErrorMessage();
-    // if (
-      // message !== "찾으시는 제품 이름이나 링크를 알려주세요." &&
-    //   errorMessage === "" &&
-    //   content.length > 1 &&
-    //   content.length <= 110
-    // ) {
-    //   obj = {
-    //     type: "feedback",
-    //     username: "anonymous",
-    //     comment: content,
-    //   };
-    //   const headers = {
-    //     "Content-type": "application/x-www-form-urlencoded; charset=UTF-8",
-    
-    //   };
-   
-    //   url =
-    //     "https://4rexky5ex4.execute-api.ap-northeast-2.amazonaws.com/test/comment";
-    //   axios
-    //     .post(url, obj, { headers })
-    //     .then((response) => {
-    //       _setContent("");
-    //       handleCommentGetAll();
-    //       setRegister(true);
-    //       window.scrollTo(0, 0);
-    //       setTimeout(() => {
-    //         location.reload();
-    //       }, 3000);
-    //     })
-    //     .catch((error) => {
-    //       console.log(error);
-    //     });
-    // }
-  };
-  */
+    useEffect(() => {
+        console.log('111', rand)
+        setUpdated(false)
+        let url = 'https://4rexky5ex4.execute-api.ap-northeast-2.amazonaws.com/test/aurora/?type=community'
+        const headers = {
+            "Content-type": "application/x-www-form-urlencoded; charset=UTF-8",
+            Accept: "*/*",
+          };
+        axios.get(url).then((response) => {
+            setPosts(response.data);
+            setUpdated(true)
+        }).catch((error) => {
+            console.log(error);
+        });
+    }, [rand]);
+
+    useEffect(() => {
+        let temp_posts = JSON.parse(JSON.stringify(posts));
+        for(let i=0; i<temp_posts.length; i++){
+            temp_posts[i]['replyCount'] = 0;
+            for(let j=0; j<temp_posts.length; j++){
+                if(temp_posts[i].id === temp_posts[j].parent_id){            
+                    temp_posts[i]['replyCount'] += 1
+                }
+            }
+        }
+        console.log(temp_posts)
+        setPosts(temp_posts);
+        console.log(posts)
+    }, [updated]);
   return (
     <StyleListPage>
       <Content>
         <GNB />
         <Title>커뮤니티</Title>
-        <PostList />
-        <FBInputContainer />
+        <PostList/>
+        <FBInputContainer type={'community'} parent_id={0} setRand={setRand}/>
+        
       </Content>
       <BgStyle>
         <BgImg src={bgImage} alt="bgImage" />
@@ -176,6 +163,7 @@ const FBButton = styled.button`
 `;
 */
 const BgStyle = styled.div`
+<<<<<<< Updated upstream
   position: fixed;
   width: 344px;
   height: 626px;
@@ -184,6 +172,17 @@ const BgStyle = styled.div`
   margin-right: 30px;
   margin-bottom: 30px;
 `;
+=======
+    position: fixed;
+    width: 344px;
+    height: 626px;
+    right: 0;
+    bottom: 0;
+    margin-right: 30px;
+    margin-bottom: 30px;
+    z-index: -1;
+`
+>>>>>>> Stashed changes
 
 const BgImg = styled.img`
   width: 344px;

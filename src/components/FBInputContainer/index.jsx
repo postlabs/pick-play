@@ -1,8 +1,11 @@
 import React, { useState } from "react";
 import styled from "styled-components";
 import {Body14, Gray400, Header14, Header36, MonoBlack} from "../../styledMixins"
+import axios from "axios";
 
-function FBInputContainer() {
+function FBInputContainer(props) {
+    const {type, parent_id, setRand } = props;
+    console.log(type, parent_id)
     const [content, _setContent] = useState("");
   
     const handleCommentUpdate =(e) => {
@@ -15,50 +18,60 @@ function FBInputContainer() {
       //   return;
       // }
       // checkErrorMessage();
-      // if (
-        // message !== "찾으시는 제품 이름이나 링크를 알려주세요." &&
-      //   errorMessage === "" &&
-      //   content.length > 1 &&
-      //   content.length <= 110
-      // ) {
-      //   obj = {
-      //     type: "feedback",
-      //     username: "anonymous",
-      //     comment: content,
-      //   };
-      //   const headers = {
-      //     "Content-type": "application/x-www-form-urlencoded; charset=UTF-8",
-      //     Accept: "*/*",
-      //   };
-     
-      //   url =
-      //     "https://4rexky5ex4.execute-api.ap-northeast-2.amazonaws.com/test/comment";
-      //   axios
-      //     .post(url, obj, { headers })
-      //     .then((response) => {
-      //       _setContent("");
+      if (content !== "댓글을 입력해주세요" &&
+        content.length > 1) {
+        
+        let obj = {
+           type: type,
+           username: "anonymous",
+           comment: content,
+           parent_id: parent_id
+         };
+         let headers = {
+           "Content-type": "application/x-www-form-urlencoded; charset=UTF-8",
+           "Access-Control-Allow-Origin": "*"
+         };
+        
+         let url =
+           "https://4rexky5ex4.execute-api.ap-northeast-2.amazonaws.com/test/aurora";
+         axios
+           .post(url, obj )
+           .then((response) => {
+             _setContent("");
       //       handleCommentGetAll();
       //       setRegister(true);
       //       window.scrollTo(0, 0);
       //       setTimeout(() => {
       //         location.reload();
       //       }, 3000);
-      //     })
-      //     .catch((error) => {
-      //       console.log(error);
-      //     });
-      // }
+            setRand(Math.random())
+           })
+           .catch((error) => {
+             console.log(error);
+           });
+       }
     };
     return (
         <FBInputStyle>
           <div className="flexElement">
-            <FBInput
-              type="text"
-              placeholder="댓글을 입력해주세요"
-              onChange={handleCommentUpdate}
-              value={content}
-              messageCount={content.length}
-            />
+            {type === "community" &&
+              <FBInput
+                type="text"
+                placeholder="댓글을 입력해주세요"
+                onChange={handleCommentUpdate}
+                value={content}
+                messageCount={content.length}
+              />
+            }
+            {type === "reply" &&
+              <FBInputReply
+                type="text"
+                placeholder="댓글을 입력해주세요"
+                onChange={handleCommentUpdate}
+                value={content}
+                messageCount={content.length}
+              />
+            }
             <FBButton message={content.length} onClick={handleSubmit}>
               남기기
             </FBButton>
@@ -101,6 +114,29 @@ const FBInput = styled.input`
   }
   padding-left: 12px;
   padding-right: 12px;
+  ${Body14}
+
+  ::placeholder {
+    ${Body14}
+    ${Gray400}
+  }
+`;
+const FBInputReply = styled.input`
+  width: 642px;
+  height: 36px;
+  //color: var(--mountain-mist);
+  border: 1px solid #bdbdbd;
+  border: ${(props) =>
+    props.messageCount >= 110 ? "1px solid red" : "1px solid #bdbdbd"};
+  border-radius: 4px;
+  &:focus {
+    outline-width: 0;
+    outline: none;
+    ${MonoBlack}
+  }
+  padding-left: 12px;
+  padding-right: 12px;
+  margin-left: 30px;
   ${Body14}
 
   ::placeholder {

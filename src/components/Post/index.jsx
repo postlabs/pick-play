@@ -2,10 +2,11 @@ import React, {Fragment, useState} from "react";
 import styled from "styled-components";
 import {Header14, Header12, Body14, Body12, MonoBlack, Gray600} from "../../styledMixins"
 import FBInputContainer from "../FBInputContainer";
+import postData from "../../data/json/posts.json";
 
 function Post(props) {
-    const { data } = props;
-    console.log(data.img)
+    const { data, setRand } = props;
+    console.log(data)
 
     const [click, setClick] = useState(false);
     const onClick = () => {
@@ -15,13 +16,13 @@ function Post(props) {
         <Fragment>
             <PostStyle>
                 <LeftStyle>
-                    <Img src={data.img}/>
+                    <Img src={postData[0].img}/>
                 </LeftStyle>
                 <RightStyle>
-                    <NameStyle>{data.name}</NameStyle>
-                    <ArticleStyle>{data.article}</ArticleStyle>
+                    <NameStyle>{data.username}</NameStyle>
+                    <ArticleStyle>{data.comment}</ArticleStyle>
                     <InfoStyle>
-                        <Date>{data.date}</Date>
+                        <Date>{data.time}</Date>
                         <Reply>
                             <ReplyText>댓글</ReplyText>
                             <ReplyCount>{data.replyCount}</ReplyCount>
@@ -30,7 +31,7 @@ function Post(props) {
                     </InfoStyle>
                 </RightStyle>
             </PostStyle>
-            {click && <FBInputContainer/>}
+            {click && <FBInputContainer type={'reply'} parent_id={data.id} setRand={setRand}/>}
         </Fragment>
     );
 }
