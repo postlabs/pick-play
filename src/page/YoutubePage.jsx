@@ -119,7 +119,6 @@ const StyledYoutubePage = styled.div`
   ul.pagination li a {
     text-decoration: none;
     color: black;
-    font-size: 1rem;
   }
 
   ul.pagination li.active a {
