@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import styled from "styled-components";
 import loginImg from "../data/image/loginImg.png";
 import BasicButton from "../components/BasicButton/BasicButton";
@@ -13,26 +13,35 @@ import {
 } from "../styledMixins";
 import GNB from "../components/GNB";
 import userData from "../data/json/front_demo_data.json";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { getUserInformation } from "../modules/userInfo";
+import { useNavigate } from "react-router-dom";
+import LoginErrorModal from "../components/LoginErrorModal";
 
 const LoginPage = () => {
-  let [id, setId] = useState();
-  let [password, setPassword] = useState();
-  let [failLogin, setFailLogin] = useState(false);
+  let [id, setId] = useState("");
+  let [password, setPassword] = useState("");
+  let [modalOpen, setModalOpen] = useState(false);
 
   const dispatch = useDispatch();
-
-  console.log(userData);
+  const userInformation = useSelector((state) => state.userInfo.userInfo[0]);
+  const navigate = useNavigate();
 
   const handleLogin = () => {
     if (id && password) {
-      const userData = userData.filter(
-        (data) => data.id === id && data.password === password
+      const userInfoData = userData.filter(
+        (data) => data.id === id && data.pwd === password
       );
-      dispatch(getUserInformation(userData));
+      if (userInfoData.length !== 0) {
+        dispatch(getUserInformation(userInfoData));
+        navigate("/");
+      } else {
+        setModalOpen(true);
+      }
     }
   };
+
+  console.log(userInformation);
 
   //useEffect 사용해서 로그인 페이지들어오면 리덕스 유저정보 삭제
 
@@ -56,19 +65,25 @@ const LoginPage = () => {
             <input
               onChange={(e) => setPassword(e.target.value)}
               placeholder="비밀번호 입력"
-              type="text"
+              type="password"
             />
           </div>
         </div>
       </div>
-      <div onClick={handleLogin} className="loginBtn">
+      <div className="loginBtn">
         <BasicButton
+          cursor={
+            id.length > 5 && password.length > 5 ? "pointer" : "not-allowed"
+          }
+          onClick={handleLogin}
           text={"로그인"}
           size={"big"}
           width={"384px"}
-          state={"disabled"}
+          state={id.length > 5 && password.length > 5 ? "default" : "disabled"}
         />
       </div>
+
+      {modalOpen && <LoginErrorModal setModalOpen={setModalOpen} />}
     </StyledLoginPage>
   );
 };

@@ -8,8 +8,6 @@ function LogoProbe() {
     <LogoProbeStyle>
       <Link style={{ textDecoration: "none" }} to={"/"}>
         <LogoProbeImg src={logoImg} alt="logo" />
-          
-        
       </Link>
     </LogoProbeStyle>
   );
@@ -27,7 +25,6 @@ const LogoProbeStyle = styled.div`
 
   margin-top: 14;
   margin-left: 40;
-  
 `;
 
 const LogoProbeImg = styled.img`
@@ -35,7 +32,7 @@ const LogoProbeImg = styled.img`
   height: 45px;
   min-height: 36px;
   margin-top: 0px;
-  
+
   line-height: 36px;
   white-space: nowrap;
 `;

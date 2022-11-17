@@ -64,8 +64,8 @@ const CommunityPage = () => {
   */
   return (
     <StyleListPage>
-      <GNB />
       <Content>
+        <GNB />
         <Title>커뮤니티</Title>
         <PostList />
         <FBInputContainer />
@@ -78,10 +78,11 @@ const CommunityPage = () => {
 };
 
 const StyleListPage = styled.div`
-  width: 1224px;
+  /* width: 1200px; */
   //height: 500px;
-  //display: flex;
-  //align-items: center;
+  display: flex;
+  align-items: center;
+  justify-content: center;
   //justify-content: space-between;
   //position: fixed;
   //top: 0;
@@ -97,6 +98,10 @@ const Content = styled.div`
   width: 792px;
   //border: 1px solid red;
   margin: 0 auto;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
 `;
 
 const Title = styled.div`

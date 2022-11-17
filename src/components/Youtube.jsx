@@ -3,7 +3,6 @@ import styled from "styled-components";
 import exImg from "../data/image/loginImg.png";
 import { Gray500, Header14, Header18, Title18 } from "../styledMixins";
 const Youtube = ({ content }) => {
-  console.log(content);
   return (
     <StyledYoutube>
       <a href={`https://www.youtube.com/watch?v=${content.id}`}>

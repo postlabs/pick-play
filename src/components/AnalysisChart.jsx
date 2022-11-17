@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { Doughnut } from "react-chartjs-2";
 import { Chart, ArcElement } from "chart.js";
 import styled from "styled-components";
@@ -18,23 +18,60 @@ import {
 } from "../styledMixins";
 import Explanation from "./Explanation";
 import explanaitonData from "../data/json/explanation.json";
+import { useSelector } from "react-redux";
+import { useNavigate } from "react-router-dom";
+import artCharacter from "../data/image/artCharacter.png";
+import readCharacter from "../data/image/readCharacter.png";
+import languageCharacter from "../data/image/languageCharacter.png";
+import exerciseCharacter from "../data/image/exerciseCharacter.png";
+import researchCharacter from "../data/image/researchCharacter.png";
+import sensibilityCharacter from "../data/image/sensibilityCharacter.png";
 const AnalysisChart = () => {
+  const userInformation = useSelector((state) => state.userInfo.userInfo[0]);
+  const navigate = useNavigate();
   Chart.register(ArcElement);
+
+  const art = Math.floor(userInformation && userInformation.tendency1);
+  const read = Math.floor(userInformation && userInformation.tendency2);
+  const language = Math.floor(userInformation && userInformation.tendency3);
+  const exercise = Math.floor(userInformation && userInformation.tendency4);
+  const research = Math.floor(userInformation && userInformation.tendency5);
+  const sensibility = Math.floor(userInformation && userInformation.tendency6);
+
+  const artColor = "#FBB562";
+  const readColor = "#FECA46";
+  const languageColor = "#F26359";
+  const exerciseColor = "#93D0F1";
+  const researchColor = "#B13F69";
+  const sensibilityColor = "#F8B3C5";
+
+  let obj = {
+    art: art,
+    read: read,
+    language: language,
+    exercise: exercise,
+    research: research,
+    sensibility: sensibility,
+  };
+
+  let highRate = Object.keys(obj).find(
+    (key) => obj[key] === Math.max(...Object.values(obj))
+  );
 
   let data = {
     datasets: [
       {
-        data: [50, 20, 30, 25, 11, 22],
+        data: [art, read, language, exercise, research, sensibility],
         backgroundColor: [
-          "#FBB562",
-          "#F8B3C5",
-          "#93D0F1 ",
-          "#F26359",
-          "#B13F69",
-          "#FECA46",
+          artColor,
+          readColor,
+          languageColor,
+          exerciseColor,
+          researchColor,
+          sensibilityColor,
         ],
         cutout: "65%",
-        cutoutPercentage: 15,
+        // cutoutPercentage: 15,
       },
     ],
   };
@@ -44,10 +81,91 @@ const AnalysisChart = () => {
       <div className="topFlexWrap">
         <div className="doughnut">
           <Doughnut data={data} />
+          <div className="characterLayout">
+            <img
+              className="chartInImg"
+              src={
+                highRate === "art"
+                  ? artCharacter
+                  : highRate === "read"
+                  ? readCharacter
+                  : highRate === "language"
+                  ? languageCharacter
+                  : highRate === "exercise"
+                  ? exerciseCharacter
+                  : highRate === "research"
+                  ? researchCharacter
+                  : highRate === "sensibility"
+                  ? sensibilityCharacter
+                  : ""
+              }
+            />
+          </div>
         </div>
         <div className="rightText">
           <div className="mainAnalysisText">
-            오로라 어린이는 예술성이 21%로 가장 높네요!
+            {`${userInformation ? userInformation.name : "오로라"} 어린이는`}{" "}
+            <span
+              style={{
+                color:
+                  highRate === "art"
+                    ? artColor
+                    : highRate === "read"
+                    ? readColor
+                    : highRate === "language"
+                    ? languageColor
+                    : highRate === "exercise"
+                    ? exerciseColor
+                    : highRate === "research"
+                    ? researchColor
+                    : highRate === "sensibility"
+                    ? sensibilityColor
+                    : "black",
+              }}
+            >
+              {`${
+                highRate === "art"
+                  ? "예술성"
+                  : highRate === "read"
+                  ? "주도성"
+                  : highRate === "language"
+                  ? "언어성"
+                  : highRate === "exercise"
+                  ? "운동성"
+                  : highRate === "research"
+                  ? "탐구성"
+                  : "감수성"
+              }`}
+            </span>
+            이
+            <span
+              style={{
+                color:
+                  highRate === "art"
+                    ? artColor
+                    : highRate === "read"
+                    ? readColor
+                    : highRate === "language"
+                    ? languageColor
+                    : highRate === "exercise"
+                    ? exerciseColor
+                    : highRate === "research"
+                    ? researchColor
+                    : highRate === "sensibility"
+                    ? sensibilityColor
+                    : "black",
+              }}
+            >
+              {`${Math.max(
+                art,
+                read,
+                language,
+                exercise,
+                research,
+                sensibility
+              )}%`}
+            </span>
+            로 가장 높네요!
           </div>
           <div className="middleFlexWrap">
             <div className="bottomFlexWrap left">
@@ -55,42 +173,63 @@ const AnalysisChart = () => {
                 <img className="chip" src={orangeChip} />
                 <div>예술성</div>
               </div>
-              <div className="percent">21%</div>
+              <div style={{ color: "#FBB562" }} className="percent">
+                {art}%
+              </div>
             </div>
             <div className="bottomFlexWrap">
               <div className="leftText">
                 <img className="chip" src={yellowChip} />
                 <div>주도성</div>
               </div>
-              <div className="percent">21%</div>
+              <div style={{ color: "#FECA46" }} className="percent">
+                {" "}
+                {read}%
+              </div>
             </div>
             <div className="bottomFlexWrap left">
               <div className="leftText">
-                <img className="chip" src={jamongChip} />
+                <img
+                  style={{ color: "#FBB562" }}
+                  className="chip"
+                  src={jamongChip}
+                />
                 <div>언어성</div>
               </div>
-              <div className="percent">21%</div>
+              <div style={{ color: "#F26359" }} className="percent">
+                {" "}
+                {language}%
+              </div>
             </div>
             <div className="bottomFlexWrap">
               <div className="leftText">
                 <img className="chip" src={skyChip} />
                 <div>운동성</div>
               </div>
-              <div className="percent">21%</div>
+              <div style={{ color: "#93D0F1" }} className="percent">
+                {" "}
+                {exercise}%
+              </div>
             </div>
             <div className="bottomFlexWrap left">
               <div className="leftText">
                 <img className="chip" src={purpleChip} />
                 <div>탐구성</div>
               </div>
-              <div className="percent">21%</div>
+              <div style={{ color: "#B13F69" }} className="percent">
+                {" "}
+                {research}%
+              </div>
             </div>
             <div className="bottomFlexWrap">
               <div className="leftText">
                 <img className="chip" src={pinkChip} />
                 <div>감수성</div>
               </div>
-              <div className="percent">21%</div>
+              <div style={{ color: "#F8B3C5" }} className="percent">
+                {" "}
+                {sensibility}%
+              </div>
             </div>
           </div>
         </div>
@@ -106,6 +245,7 @@ const AnalysisChart = () => {
       <div className="bottomBtn">
         <div className="bottomBtnLeft">
           <GrayBasicButton
+            onClick={() => navigate("/product")}
             text={"내 성향에 맞는 상품 보러가기"}
             size={"medium"}
             state={"default"}
@@ -114,6 +254,7 @@ const AnalysisChart = () => {
         </div>
         <div className="bottomBtnRight">
           <GrayBasicButton
+            onClick={() => navigate("/youtube")}
             text={"내 성향에 맞는 컨텐츠 보러가기"}
             size={"medium"}
             state={"default"}
@@ -131,8 +272,28 @@ const StyledAnalysisChart = styled.div`
 
   flex-direction: column;
   margin-top: 50px;
-  .topFlexWrap {
+
+  .chartInImg {
+    width: 170px;
+    height: 127px;
+  }
+
+  .characterLayout {
+    border: 2px solid #f5f5f5;
+    border-radius: 50%;
+    width: 200px;
+    height: 200px;
+    display: flex;
+    align-items: center;
     justify-content: center;
+    margin-right: 40px;
+    position: absolute;
+    top: 23.5%;
+    left: 23.5%;
+  }
+
+  .topFlexWrap {
+    /* justify-content: center; */
     display: flex;
     align-items: center;
   }
@@ -159,7 +320,9 @@ const StyledAnalysisChart = styled.div`
   }
 
   .doughnut {
-    width: 408px;
+    width: 384px;
+    height: 384px;
+    position: relative;
   }
 
   .rightText {
@@ -206,6 +369,7 @@ const StyledAnalysisChart = styled.div`
   .bottomBtn {
     margin-top: 20px;
     display: flex;
+    margin-bottom: 120px;
 
     .bottomBtnLeft {
       margin-right: 16px;

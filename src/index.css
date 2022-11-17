@@ -61,3 +61,6 @@ code {
   font-weight: 500;
   src: url("./font/Pretendard-Medium.otf") format("opentype");
 }
+body {
+  overflow: overlay;
+}
