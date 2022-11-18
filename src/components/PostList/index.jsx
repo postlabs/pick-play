@@ -6,39 +6,7 @@ import axios from "axios";
 
 function PostList(props) {
     const {posts, setRand} = props;
-    /*
-    const [posts, setPosts] = useState([]);
-    const [updated, setUpdated] = useState(false);
-    const [rand, setRand] = useState(0);
-
-    useEffect(() => {
-        console.log('111', rand)
-        setUpdated(false)
-        let url = 'https://4rexky5ex4.execute-api.ap-northeast-2.amazonaws.com/test/aurora/?type=community'
-      
-        axios.get(url).then((response) => {
-            setPosts(response.data);
-            setUpdated(true)
-        }).catch((error) => {
-            console.log(error);
-        });
-    }, [rand]);
-
-    useEffect(() => {
-        let temp_posts = JSON.parse(JSON.stringify(posts));
-        for(let i=0; i<temp_posts.length; i++){
-            temp_posts[i]['replyCount'] = 0;
-            for(let j=0; j<temp_posts.length; j++){
-                if(temp_posts[i].id === temp_posts[j].parent_id){            
-                    temp_posts[i]['replyCount'] += 1
-                }
-            }
-        }
-        console.log(temp_posts)
-        setPosts(temp_posts);
-        console.log(posts)
-    }, [updated]);
-    */
+    
     return (
         <PostStyle>
             {posts.map((post, index) => (

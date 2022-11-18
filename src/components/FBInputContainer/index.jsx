@@ -4,8 +4,8 @@ import {Body14, Gray400, Header14, Header36, MonoBlack} from "../../styledMixins
 import axios from "axios";
 
 function FBInputContainer(props) {
-    const {type, parent_id, setRand } = props;
-    console.log(type, parent_id)
+    const {type, parent_id, setRand, setClick } = props;
+    //console.log(type, parent_id)
     const [content, _setContent] = useState("");
   
     const handleCommentUpdate =(e) => {
@@ -45,6 +45,7 @@ function FBInputContainer(props) {
       //         location.reload();
       //       }, 3000);
             setRand(Math.random())
+            setClick(false)
            })
            .catch((error) => {
              console.log(error);

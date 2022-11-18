@@ -111,12 +111,12 @@ const Content = styled.div`
 `;
 
 const Title = styled.div`
-  width: 125px;
+  width: 792px;
   height: 46px;
   margin-top: 40px;
   //border: 1px solid red;
-  display: flex;
-  align-items: center;
+  //display: block;
+  //align-items: left;
   ${Header36}
   ${MonoBlack}
 `;
