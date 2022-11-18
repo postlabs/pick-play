@@ -62,7 +62,7 @@ const StyledBasicButton = styled.div`
       ? "12px 16px 12px 8px"
       : props.size === "small" && props.arrow === "right"
       ? "7px 5px 7px 10px"
-      : props.size === "medium" && props.arrow === "left"
+      : props.size === "medium" && props.arrow === "right"
       ? "6px 6px 6px 12px"
       : props.size === "large" && props.arrow === "right"
       ? "8px 8px 8px 14px"

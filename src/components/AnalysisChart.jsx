@@ -58,17 +58,44 @@ const AnalysisChart = () => {
     (key) => obj[key] === Math.max(...Object.values(obj))
   );
 
+  let chartData = [
+    [art, artColor],
+    [read, readColor],
+    [language, languageColor],
+    [exercise, exerciseColor],
+    [research, researchColor],
+    [sensibility, sensibilityColor],
+  ];
+
+  //sort
+  for (let i = 0; i < chartData.length; i++) {
+    for (let j = 0; j < chartData.length; j++) {
+      if (chartData[i][0] > chartData[j][0]) {
+        let chartDataTemp = chartData[i];
+        chartData[i] = chartData[j];
+        chartData[j] = chartDataTemp;
+      }
+    }
+  }
+
   let data = {
     datasets: [
       {
-        data: [art, read, language, exercise, research, sensibility],
+        data: [
+          chartData[0][0],
+          chartData[1][0],
+          chartData[2][0],
+          chartData[3][0],
+          chartData[4][0],
+          chartData[5][0],
+        ],
         backgroundColor: [
-          artColor,
-          readColor,
-          languageColor,
-          exerciseColor,
-          researchColor,
-          sensibilityColor,
+          chartData[0][1],
+          chartData[1][1],
+          chartData[2][1],
+          chartData[3][1],
+          chartData[4][1],
+          chartData[5][1],
         ],
         cutout: "65%",
         // cutoutPercentage: 15,
@@ -247,7 +274,7 @@ const AnalysisChart = () => {
           <GrayBasicButton
             onClick={() => navigate("/product")}
             text={"내 성향에 맞는 상품 보러가기"}
-            size={"medium"}
+            size={"large"}
             state={"default"}
             arrow={"right"}
           />
@@ -256,7 +283,7 @@ const AnalysisChart = () => {
           <GrayBasicButton
             onClick={() => navigate("/youtube")}
             text={"내 성향에 맞는 컨텐츠 보러가기"}
-            size={"medium"}
+            size={"large"}
             state={"default"}
             arrow={"right"}
           />

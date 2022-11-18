@@ -15,75 +15,82 @@ import FBInputContainer from "../components/FBInputContainer";
 import axios from "axios";
 
 const CommunityPage = () => {
-    const [posts, setPosts] = useState([]);
-    const [motherPosts, setMotherPosts] = useState([]);
-    const [childPosts, setChildPosts] = useState([]);
-    const [updated, setUpdated] = useState(0);
-    const [rand, setRand] = useState(0);
-    const userInformation = useSelector((state) => state.userInfo.userInfo[0]);
+  const [posts, setPosts] = useState([]);
+  const [motherPosts, setMotherPosts] = useState([]);
+  const [childPosts, setChildPosts] = useState([]);
+  const [updated, setUpdated] = useState(0);
+  const [rand, setRand] = useState(0);
+  const userInformation = useSelector((state) => state.userInfo.userInfo[0]);
 
-    useEffect(() => {
-      if (userInformation === undefined) {
-        window.location.href = "/login";
-      }
-      setRand(Math.random())
-      console.log(updated, rand)
-    }, []);
+  useEffect(() => {
+    if (userInformation === undefined) {
+      window.location.href = "/login";
+    }
+    setRand(Math.random());
+    console.log(updated, rand);
+  }, []);
 
-    useEffect(() => {
-        //console.log('111', rand)
-        setUpdated(0)
-        let url_post = 'https://4rexky5ex4.execute-api.ap-northeast-2.amazonaws.com/test/aurora/?type=community'
-        axios.get(url_post).then((response) => {
-            setMotherPosts(response.data);
-            setUpdated(1)
-        }).catch((error) => {
-            console.log(error);
-        });
+  useEffect(() => {
+    //console.log('111', rand)
+    setUpdated(0);
+    let url_post =
+      "https://4rexky5ex4.execute-api.ap-northeast-2.amazonaws.com/test/aurora/?type=community";
+    axios
+      .get(url_post)
+      .then((response) => {
+        setMotherPosts(response.data);
+        setUpdated(1);
+      })
+      .catch((error) => {
+        console.log(error);
+      });
 
-        let url_reply = 'https://4rexky5ex4.execute-api.ap-northeast-2.amazonaws.com/test/aurora/?type=reply'
-        axios.get(url_reply).then((response) => {
-            setChildPosts(response.data);
-            setUpdated(2)
-        }).catch((error) => {
-            console.log(error);
-        });
-    }, [rand]);
+    let url_reply =
+      "https://4rexky5ex4.execute-api.ap-northeast-2.amazonaws.com/test/aurora/?type=reply";
+    axios
+      .get(url_reply)
+      .then((response) => {
+        setChildPosts(response.data);
+        setUpdated(2);
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  }, [rand]);
 
-    useEffect(() => {
-      if(updated === 2){
-        //console.log(motherPosts.length, childPosts.length)
-        let final_posts = []
-        for(let i=0; i<motherPosts.length; i++){
-          final_posts.push(motherPosts[i])
-          for(let j=0; j<childPosts.length; j++){
-            if(motherPosts[i].id === childPosts[j].parent_id){
-              final_posts.push(childPosts[j])
-            }
+  useEffect(() => {
+    if (updated === 2) {
+      //console.log(motherPosts.length, childPosts.length)
+      let final_posts = [];
+      for (let i = 0; i < motherPosts.length; i++) {
+        final_posts.push(motherPosts[i]);
+        for (let j = 0; j < childPosts.length; j++) {
+          if (motherPosts[i].id === childPosts[j].parent_id) {
+            final_posts.push(childPosts[j]);
           }
         }
-
-        for(let i=0; i<final_posts.length; i++){
-          final_posts[i]['replyCount'] = 0;
-            for(let j=0; j<final_posts.length; j++){
-                if(final_posts[i].id === final_posts[j].parent_id){            
-                  final_posts[i]['replyCount'] += 1
-                }
-            }
-        }
-        //console.log(final_posts)
-        setPosts(final_posts);
-        //console.log(posts)
       }
-    }, [updated]);
+
+      for (let i = 0; i < final_posts.length; i++) {
+        final_posts[i]["replyCount"] = 0;
+        for (let j = 0; j < final_posts.length; j++) {
+          if (final_posts[i].id === final_posts[j].parent_id) {
+            final_posts[i]["replyCount"] += 1;
+          }
+        }
+      }
+      //console.log(final_posts)
+      setPosts(final_posts);
+      //console.log(posts)
+    }
+  }, [updated]);
   return (
     <StyleListPage>
       <Content>
         <GNB />
         <Title>커뮤니티</Title>
-        <PostList posts={posts} setRand={setRand}/>
-        <FBInputContainer type={'community'} parent_id={0} setRand={setRand}/>
-        
+        <PostList posts={posts} setRand={setRand} />
+        <FBInputContainer type={"community"} parent_id={0} setRand={setRand} />
       </Content>
       <BgStyle>
         <BgImg src={bgImage} alt="bgImage" />
@@ -192,15 +199,15 @@ const FBButton = styled.button`
 `;
 */
 const BgStyle = styled.div`
-    position: fixed;
-    width: 344px;
-    height: 626px;
-    right: 0;
-    bottom: 0;
-    margin-right: 30px;
-    margin-bottom: 30px;
-    z-index: -1;
-`
+  position: fixed;
+  width: 344px;
+  height: 626px;
+  right: 0;
+  bottom: 0;
+  margin-right: 30px;
+  margin-bottom: 30px;
+  z-index: -1;
+`;
 
 const BgImg = styled.img`
   width: 344px;
