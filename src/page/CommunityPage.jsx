@@ -15,45 +15,64 @@ import axios from "axios";
 
 const CommunityPage = () => {
     const [posts, setPosts] = useState([]);
-    const [updated, setUpdated] = useState(false);
+    const [motherPosts, setMotherPosts] = useState([]);
+    const [childPosts, setChildPosts] = useState([]);
+    const [updated, setUpdated] = useState(0);
     const [rand, setRand] = useState(0);
 
     useEffect(() => {
-        console.log('111', rand)
-        setUpdated(false)
-        let url = 'https://4rexky5ex4.execute-api.ap-northeast-2.amazonaws.com/test/aurora/?type=community'
-        const headers = {
-            "Content-type": "application/x-www-form-urlencoded; charset=UTF-8",
-            Accept: "*/*",
-          };
-        axios.get(url).then((response) => {
-            setPosts(response.data);
-            setUpdated(true)
+        //console.log('111', rand)
+        setUpdated(0)
+        let url_post = 'https://4rexky5ex4.execute-api.ap-northeast-2.amazonaws.com/test/aurora/?type=community'
+        axios.get(url_post).then((response) => {
+            setMotherPosts(response.data);
+            setUpdated(1)
+        }).catch((error) => {
+            console.log(error);
+        });
+
+        let url_reply = 'https://4rexky5ex4.execute-api.ap-northeast-2.amazonaws.com/test/aurora/?type=reply'
+        axios.get(url_reply).then((response) => {
+            setChildPosts(response.data);
+            setUpdated(2)
         }).catch((error) => {
             console.log(error);
         });
     }, [rand]);
 
     useEffect(() => {
-        let temp_posts = JSON.parse(JSON.stringify(posts));
-        for(let i=0; i<temp_posts.length; i++){
-            temp_posts[i]['replyCount'] = 0;
-            for(let j=0; j<temp_posts.length; j++){
-                if(temp_posts[i].id === temp_posts[j].parent_id){            
-                    temp_posts[i]['replyCount'] += 1
+      if(updated === 2){
+        console.log(motherPosts.length, childPosts.length)
+
+        let final_posts = []
+        for(let i=0; i<motherPosts.length; i++){
+          final_posts.push(motherPosts[i])
+          for(let j=0; j<childPosts.length; j++){
+            if(motherPosts[i].id === childPosts[j].parent_id){
+              final_posts.push(childPosts[j])
+            }
+          }
+        }
+
+        for(let i=0; i<final_posts.length; i++){
+          final_posts[i]['replyCount'] = 0;
+            for(let j=0; j<final_posts.length; j++){
+                if(final_posts[i].id === final_posts[j].parent_id){            
+                  final_posts[i]['replyCount'] += 1
                 }
             }
         }
-        console.log(temp_posts)
-        setPosts(temp_posts);
-        console.log(posts)
+        //console.log(final_posts)
+        setPosts(final_posts);
+        //console.log(posts)
+      }
     }, [updated]);
   return (
     <StyleListPage>
       <Content>
         <GNB />
         <Title>커뮤니티</Title>
-        <PostList/>
+        <PostList posts={posts} setRand={setRand}/>
         <FBInputContainer type={'community'} parent_id={0} setRand={setRand}/>
         
       </Content>
