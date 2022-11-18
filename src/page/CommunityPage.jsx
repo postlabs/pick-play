@@ -26,6 +26,8 @@ const CommunityPage = () => {
     if (userInformation === undefined) {
       window.location.href = "/login";
     }
+    setRand(Math.random());
+    console.log(updated, rand);
   }, []);
 
   useEffect(() => {
