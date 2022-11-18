@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { useSelector } from "react-redux";
 import styled from "styled-components";
 import {Body14, Gray400, Header14, Header36, MonoBlack} from "../../styledMixins"
 import axios from "axios";
@@ -8,6 +9,9 @@ function FBInputContainer(props) {
     //console.log(type, parent_id)
     const [content, _setContent] = useState("");
   
+    const userInformation = useSelector((state) => state.userInfo.userInfo[0]);
+    const name = userInformation && userInformation.name;
+    
     const handleCommentUpdate =(e) => {
       _setContent(e.target.value);
     }
@@ -23,7 +27,7 @@ function FBInputContainer(props) {
         
         let obj = {
            type: type,
-           username: "anonymous",
+           username: name,
            comment: content,
            parent_id: parent_id
          };

@@ -40,13 +40,13 @@ function Post(props) {
                     <LeftStyle>
                         <Img src={postData[0].img}/>
                     </LeftStyle>
-                    <RightStyle>
+                    <RightReplyStyle>
                         <NameStyle>{data.username}</NameStyle>
                         <ArticleStyle>{data.comment}</ArticleStyle>
                         <InfoStyle>
                             <Date>{data.time.split('-')[0] + '.' + data.time.split('-')[1] + '.' + data.time.split('-')[2].split(' ')[0]}</Date>
                         </InfoStyle>
-                    </RightStyle>
+                    </RightReplyStyle>
                 </ReplyStyle>
             }
             {click && <FBInputContainer type={'reply'} parent_id={data.id} setRand={setRand} setClick={setClick}/>}
@@ -84,6 +84,11 @@ const LeftStyle = styled.div`
 `;
 const RightStyle = styled.div`
     width: 726px;
+    //border: 1px solid black;
+`;
+
+const RightReplyStyle = styled.div`
+    width: 676px;
     //border: 1px solid black;
 `;
 

@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react";
+import { useSelector } from "react-redux";
 import GNB from "../components/GNB";
 import styled from "styled-components";
 import {
@@ -19,6 +20,13 @@ const CommunityPage = () => {
     const [childPosts, setChildPosts] = useState([]);
     const [updated, setUpdated] = useState(0);
     const [rand, setRand] = useState(0);
+    const userInformation = useSelector((state) => state.userInfo.userInfo[0]);
+
+    useEffect(() => {
+      if (userInformation === undefined) {
+        window.location.href = "/login";
+      }
+    }, []);
 
     useEffect(() => {
         //console.log('111', rand)
@@ -42,8 +50,7 @@ const CommunityPage = () => {
 
     useEffect(() => {
       if(updated === 2){
-        console.log(motherPosts.length, childPosts.length)
-
+        //console.log(motherPosts.length, childPosts.length)
         let final_posts = []
         for(let i=0; i<motherPosts.length; i++){
           final_posts.push(motherPosts[i])
