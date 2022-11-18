@@ -34,7 +34,7 @@ const CommunityPage = () => {
     //console.log('111', rand)
     setUpdated(0);
     let url_post =
-      "https://4rexky5ex4.execute-api.ap-northeast-2.amazonaws.com/test/aurora/?type=community";
+      " https://fbzelztr2j.execute-api.ap-northeast-2.amazonaws.com/test/aurora/?type=community";
     axios
       .get(url_post)
       .then((response) => {
@@ -46,7 +46,7 @@ const CommunityPage = () => {
       });
 
     let url_reply =
-      "https://4rexky5ex4.execute-api.ap-northeast-2.amazonaws.com/test/aurora/?type=reply";
+      " https://fbzelztr2j.execute-api.ap-northeast-2.amazonaws.com/test/aurora/?type=reply";
     axios
       .get(url_reply)
       .then((response) => {

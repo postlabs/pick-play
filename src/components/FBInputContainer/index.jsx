@@ -37,7 +37,7 @@ function FBInputContainer(props) {
          };
         
          let url =
-           "https://4rexky5ex4.execute-api.ap-northeast-2.amazonaws.com/test/aurora";
+           " https://fbzelztr2j.execute-api.ap-northeast-2.amazonaws.com/test/aurora";
          axios
            .post(url, obj )
            .then((response) => {
