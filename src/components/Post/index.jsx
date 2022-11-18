@@ -6,39 +6,57 @@ import postData from "../../data/json/posts.json";
 
 function Post(props) {
     const { data, setRand } = props;
-    console.log(data)
+    //console.log(data)
 
     const [click, setClick] = useState(false);
     const onClick = () => {
         setClick(!click);
+        //console.log(click)
     }
+    
     return (
         <Fragment>
-            <PostStyle>
-                <LeftStyle>
-                    <Img src={postData[0].img}/>
-                </LeftStyle>
-                <RightStyle>
-                    <NameStyle>{data.username}</NameStyle>
-                    <ArticleStyle>{data.comment}</ArticleStyle>
-                    <InfoStyle>
-                        <Date>{data.time}</Date>
-                        <Reply>
-                            <ReplyText>댓글</ReplyText>
-                            <ReplyCount>{data.replyCount}</ReplyCount>
-                        </Reply>
-                        <ReplyBtn onClick={onClick}>댓글 달기</ReplyBtn>
-                    </InfoStyle>
-                </RightStyle>
-            </PostStyle>
-            {click && <FBInputContainer type={'reply'} parent_id={data.id} setRand={setRand}/>}
+            {data.type === 'community' &&
+                <PostStyle>
+                    <LeftStyle>
+                        <Img src={postData[0].img}/>
+                    </LeftStyle>
+                    <RightStyle>
+                        <NameStyle>{data.username}</NameStyle>
+                        <ArticleStyle>{data.comment}</ArticleStyle>
+                        <InfoStyle>
+                            <Date>{data.time.split('-')[0] + '.' + data.time.split('-')[1] + '.' + data.time.split('-')[2].split(' ')[0]}</Date>
+                            <Reply>
+                                <ReplyText>댓글</ReplyText>
+                                <ReplyCount>{data.replyCount}</ReplyCount>
+                            </Reply>
+                            <ReplyBtn onClick={onClick}>댓글 달기</ReplyBtn>
+                        </InfoStyle>
+                    </RightStyle>
+                </PostStyle>
+            }
+            {data.type === 'reply' &&
+                <ReplyStyle>
+                    <LeftStyle>
+                        <Img src={postData[0].img}/>
+                    </LeftStyle>
+                    <RightReplyStyle>
+                        <NameStyle>{data.username}</NameStyle>
+                        <ArticleStyle>{data.comment}</ArticleStyle>
+                        <InfoStyle>
+                            <Date>{data.time.split('-')[0] + '.' + data.time.split('-')[1] + '.' + data.time.split('-')[2].split(' ')[0]}</Date>
+                        </InfoStyle>
+                    </RightReplyStyle>
+                </ReplyStyle>
+            }
+            {click && <FBInputContainer type={'reply'} parent_id={data.id} setRand={setRand} setClick={setClick}/>}
         </Fragment>
     );
 }
 
 const PostStyle = styled.div`
     width: 792px;
-    height: 126px;
+    min-height: 106px;
     display: flex;
     flex-direction: row;
     
@@ -48,11 +66,30 @@ const PostStyle = styled.div`
     margin-bottom: 14px;
 `;
 
+const ReplyStyle = styled.div`
+    width: 762px;
+    min-height: 106px;
+    display: flex;
+    flex-direction: row;
+    
+    //border: 1px solid black;
+    border-radius: 6px;
+    background-color: #FAFAFA;
+    margin-bottom: 14px;
+    margin-left: 30px;
+`;
+
 const LeftStyle = styled.div`
-    width: 82px;
+    width: 66px;
 `;
 const RightStyle = styled.div`
-    width: 710px;
+    width: 726px;
+    //border: 1px solid black;
+`;
+
+const RightReplyStyle = styled.div`
+    width: 676px;
+    //border: 1px solid black;
 `;
 
 const Img = styled.img`
@@ -77,12 +114,16 @@ const ArticleStyle = styled.div`
     //border: 1px solid black;
     ${Body14}
     ${MonoBlack}
+    margin-right: 16px;
+    margin-top: 8px;
 `;
 
 const InfoStyle = styled.div`
     //border: 1px solid black;
     display: flex;
     flex-direction: row;
+    margin-top: 8px;
+    margin-bottom: 16px;
 `;
 
 const Date = styled.div`
@@ -96,6 +137,8 @@ const Reply = styled.div`
     display: flex;
     flex-direction: row;
     margin-left: 12px;
+    ${Header12}
+    ${Gray600}
 `;
 const ReplyText = styled.div`
     //border: 1px solid black;
@@ -114,6 +157,7 @@ const ReplyBtn = styled.div`
     ${Header12}
     ${Gray600}
     margin-left: 12px;
+    cursor : pointer;
 `;
 
 export default Post;
