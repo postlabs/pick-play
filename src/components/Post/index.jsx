@@ -157,6 +157,7 @@ const ReplyBtn = styled.div`
     ${Header12}
     ${Gray600}
     margin-left: 12px;
+    cursor : pointer;
 `;
 
 export default Post;
