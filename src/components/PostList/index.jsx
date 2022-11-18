@@ -4,7 +4,9 @@ import Post from "../Post";
 //import postData from "../../data/json/posts.json";
 import axios from "axios";
 
-function PostList() {
+function PostList(props) {
+    const {posts, setRand} = props;
+    /*
     const [posts, setPosts] = useState([]);
     const [updated, setUpdated] = useState(false);
     const [rand, setRand] = useState(0);
@@ -13,10 +15,7 @@ function PostList() {
         console.log('111', rand)
         setUpdated(false)
         let url = 'https://4rexky5ex4.execute-api.ap-northeast-2.amazonaws.com/test/aurora/?type=community'
-        const headers = {
-            "Content-type": "application/x-www-form-urlencoded; charset=UTF-8",
-            Accept: "*/*",
-          };
+      
         axios.get(url).then((response) => {
             setPosts(response.data);
             setUpdated(true)
@@ -39,7 +38,7 @@ function PostList() {
         setPosts(temp_posts);
         console.log(posts)
     }, [updated]);
-
+    */
     return (
         <PostStyle>
             {posts.map((post, index) => (
