@@ -39,24 +39,26 @@ const CommunityPage = () => {
       .then((response) => {
         setMotherPosts(response.data);
         setUpdated(1);
+        let url_reply = "https://api.sa0sa.com/v1/aurora/?type=reply";
+        axios
+          .get(url_reply)
+          .then((response) => {
+            setChildPosts(response.data);
+            setUpdated(2);
+          })
+          .catch((error) => {
+            console.log(error);
+          });
+    
       })
       .catch((error) => {
         console.log(error);
       });
 
-    let url_reply = "https://api.sa0sa.com/v1/aurora/?type=reply";
-    axios
-      .get(url_reply)
-      .then((response) => {
-        setChildPosts(response.data);
-        setUpdated(2);
-      })
-      .catch((error) => {
-        console.log(error);
-      });
   }, [rand]);
 
   useEffect(() => {
+    console.log(updated)
     if (updated === 2) {
       //console.log(motherPosts.length, childPosts.length)
       let final_posts = [];
@@ -79,7 +81,7 @@ const CommunityPage = () => {
       }
       //console.log(final_posts)
       setPosts(final_posts);
-      //console.log(posts)
+      console.log(posts)
     }
   }, [updated]);
   return (
