@@ -33,8 +33,7 @@ const CommunityPage = () => {
   useEffect(() => {
     //console.log('111', rand)
     setUpdated(0);
-    let url_post =
-      " https://fbzelztr2j.execute-api.ap-northeast-2.amazonaws.com/test/aurora/?type=community";
+    let url_post = "https://api.sa0sa.com/v1/aurora/?type=community";
     axios
       .get(url_post)
       .then((response) => {
@@ -45,8 +44,7 @@ const CommunityPage = () => {
         console.log(error);
       });
 
-    let url_reply =
-      " https://fbzelztr2j.execute-api.ap-northeast-2.amazonaws.com/test/aurora/?type=reply";
+    let url_reply = "https://api.sa0sa.com/v1/aurora/?type=reply";
     axios
       .get(url_reply)
       .then((response) => {
