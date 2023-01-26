@@ -1,88 +1,91 @@
 import React, { useState } from "react";
 import { useSelector } from "react-redux";
 import styled from "styled-components";
-import {Body14, Gray400, Header14, Header36, MonoBlack} from "../../styledMixins"
+import {
+  Body14,
+  Gray400,
+  Header14,
+  Header36,
+  MonoBlack,
+} from "../../styledMixins";
 import axios from "axios";
 
 function FBInputContainer(props) {
-    const {type, parent_id, setRand, setClick } = props;
-    //console.log(type, parent_id)
-    const [content, _setContent] = useState("");
-  
-    const userInformation = useSelector((state) => state.userInfo.userInfo[0]);
-    const name = userInformation && userInformation.name;
-    
-    const handleCommentUpdate =(e) => {
-      _setContent(e.target.value);
+  const { type, parent_id, setRand, setClick } = props;
+  //console.log(type, parent_id)
+  const [content, _setContent] = useState("");
+
+  const userInformation = useSelector((state) => state.userInfo.userInfo[0]);
+  const name = userInformation && userInformation.name;
+
+  const handleCommentUpdate = (e) => {
+    _setContent(e.target.value);
+  };
+  const handleSubmit = (event) => {
+    // if (window.innerWidth < 791 && message.length > 110) {
+    //   setOverTextCount(true);
+    //   WaringTextRef.current.focus();
+    //   return;
+    // }
+    // checkErrorMessage();
+    if (content !== "댓글을 입력해주세요" && content.length > 1) {
+      let obj = {
+        type: type,
+        username: name,
+        comment: content,
+        parent_id: parent_id,
+      };
+      let headers = {
+        "Content-type": "application/x-www-form-urlencoded; charset=UTF-8",
+        "Access-Control-Allow-Origin": "*",
+      };
+
+      let url = "https://api.sa0sa.com/v1/aurora";
+      axios
+        .post(url, obj)
+        .then((response) => {
+          _setContent("");
+          //       handleCommentGetAll();
+          //       setRegister(true);
+          //       window.scrollTo(0, 0);
+          //       setTimeout(() => {
+          //         location.reload();
+          //       }, 3000);
+          setRand(Math.random());
+          setClick(false);
+        })
+        .catch((error) => {
+          console.log(error);
+        });
     }
-    const handleSubmit = (event) => {
-      // if (window.innerWidth < 791 && message.length > 110) {
-      //   setOverTextCount(true);
-      //   WaringTextRef.current.focus();
-      //   return;
-      // }
-      // checkErrorMessage();
-      if (content !== "댓글을 입력해주세요" &&
-        content.length > 1) {
-        
-        let obj = {
-           type: type,
-           username: name,
-           comment: content,
-           parent_id: parent_id
-         };
-         let headers = {
-           "Content-type": "application/x-www-form-urlencoded; charset=UTF-8",
-           "Access-Control-Allow-Origin": "*"
-         };
-        
-         let url =
-           "https://4rexky5ex4.execute-api.ap-northeast-2.amazonaws.com/test/aurora";
-         axios
-           .post(url, obj )
-           .then((response) => {
-             _setContent("");
-      //       handleCommentGetAll();
-      //       setRegister(true);
-      //       window.scrollTo(0, 0);
-      //       setTimeout(() => {
-      //         location.reload();
-      //       }, 3000);
-            setRand(Math.random())
-            setClick(false)
-           })
-           .catch((error) => {
-             console.log(error);
-           });
-       }
-    };
-    return (
-        <FBInputStyle>
-          <div className="flexElement">
-            {type === "community" &&
-              <FBInput
-                type="text"
-                placeholder="댓글을 입력해주세요"
-                onChange={handleCommentUpdate}
-                value={content}
-                messageCount={content.length}
-              />
-            }
-            {type === "reply" &&
-              <FBInputReply
-                type="text"
-                placeholder="댓글을 입력해주세요"
-                onChange={handleCommentUpdate}
-                value={content}
-                messageCount={content.length}
-              />
-            }
-            <FBButton message={content.length} onClick={handleSubmit}>
-              남기기
-            </FBButton>
-          </div>
-        </FBInputStyle>
-    );
+  };
+  return (
+    <FBInputStyle>
+      <div className="flexElement">
+        {type === "community" && (
+          <FBInput
+            type="text"
+            placeholder="댓글을 입력해주세요"
+            onChange={handleCommentUpdate}
+            value={content}
+            messageCount={content.length}
+          />
+        )}
+        {type === "reply" && (
+          <FBInputReply
+            type="text"
+            placeholder="댓글을 입력해주세요"
+            onChange={handleCommentUpdate}
+            value={content}
+            messageCount={content.length}
+          />
+        )}
+        <FBButton message={content.length} onClick={handleSubmit}>
+          남기기
+        </FBButton>
+      </div>
+    </FBInputStyle>
+  );
 }
 
 const FBInputStyle = styled.div`
@@ -168,4 +171,3 @@ const FBButton = styled.button`
     props.message === 0 || props.message > 110 ? "not-allowed" : "pointer"};
 `;
 export default FBInputContainer;
-
