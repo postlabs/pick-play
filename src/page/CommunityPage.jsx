@@ -37,6 +37,7 @@ const CommunityPage = () => {
     axios
       .get(url_post)
       .then((response) => {
+        console.log("호출성공1", response);
         setMotherPosts(response.data);
         setUpdated(1);
         let url_reply = "https://api.sa0sa.com/v1/aurora/?type=reply";
@@ -81,7 +82,11 @@ const CommunityPage = () => {
       }
       //console.log(final_posts)
       setPosts(final_posts);
+<<<<<<< Updated upstream
       console.log(posts)
+=======
+      console.log("합치기 성공");
+>>>>>>> Stashed changes
     }
   }, [updated]);
   return (
