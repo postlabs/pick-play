@@ -15,6 +15,24 @@ const ProductPage = () => {
     return userInformation && userInformation.product_list.includes(product.id);
   });
 
+  const newMatchProducts = [];
+
+  for (let i = 0; i < userInformation.product_list.length; i++) {
+    for (let j = 0; j < matchProducts.length; j++) {
+      if (userInformation.product_list[i] === matchProducts[j].id) {
+        newMatchProducts.push(matchProducts[j]);
+      }
+    }
+  }
+
+  // for (let i = 0; i < userInformation.content_list.length; i++) {
+  //   for (let j = 0; j < matchContent.length; j++) {
+  //     if (userInformation.content_list[i] === matchContent[j].id) {
+  //       newMatchContent.push(matchContent[j]);
+  //     }
+  //   }
+  // }
+
   const [page, setPage] = useState(1);
   const [pagingProducts, setPagingProducts] = useState("");
 
@@ -41,8 +59,8 @@ const ProductPage = () => {
       <AnalysisCharacter />
 
       <div className="productList">
-        {pagingProducts &&
-          pagingProducts.map((product) => <Product product={product} />)}
+        {newMatchProducts &&
+          newMatchProducts.map((product) => <Product product={product} />)}
       </div>
       <Pagination
         className="pagination"

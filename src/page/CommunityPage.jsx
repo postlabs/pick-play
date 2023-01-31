@@ -50,16 +50,14 @@ const CommunityPage = () => {
           .catch((error) => {
             console.log(error);
           });
-    
       })
       .catch((error) => {
         console.log(error);
       });
-
   }, [rand]);
 
   useEffect(() => {
-    console.log(updated)
+    console.log(updated);
     if (updated === 2) {
       //console.log(motherPosts.length, childPosts.length)
       let final_posts = [];
@@ -82,11 +80,7 @@ const CommunityPage = () => {
       }
       //console.log(final_posts)
       setPosts(final_posts);
-<<<<<<< Updated upstream
-      console.log(posts)
-=======
-      console.log("합치기 성공");
->>>>>>> Stashed changes
+      console.log(posts);
     }
   }, [updated]);
   return (

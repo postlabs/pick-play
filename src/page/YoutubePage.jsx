@@ -14,6 +14,16 @@ const YoutubePage = () => {
     return userInformation && userInformation.content_list.includes(content.id);
   });
 
+  const newMatchContent = [];
+
+  for (let i = 0; i < userInformation.content_list.length; i++) {
+    for (let j = 0; j < matchContent.length; j++) {
+      if (userInformation.content_list[i] === matchContent[j].id) {
+        newMatchContent.push(matchContent[j]);
+      }
+    }
+  }
+
   const [page, setPage] = useState(1);
   const [pagingContents, setPagingContents] = useState("");
 
@@ -28,7 +38,7 @@ const YoutubePage = () => {
   }, []);
 
   useEffect(() => {
-    setPagingContents(matchContent.slice((page - 1) * 16, page * 16));
+    setPagingContents(newMatchContent.slice((page - 1) * 16, page * 16));
     window.scrollTo(0, 0);
   }, [page]);
 
